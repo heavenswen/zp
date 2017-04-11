@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 声明文档使用的字符编码 -->
+    <meta charset='utf-8'>
+    <!-- 优先使用 IE 最新版本和 Chrome -->
+    <!--视口 不缩放 -->
+    <meta name="viewport" content="user-scalable=no,width=device-width, initial-scale=1.0,  minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="flexible" content="initial-dpr=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!-- 页面描述 -->
+    <meta name="description" content="不超过150个字符" />
+    <!-- 页面关键词 -->
+    <meta name="keywords" content="" />
+    <!-- 网页作者 -->
+    <meta name="author" content="male" />
+    <!-- 搜索引擎抓取 -->
+    <meta name="robots" content="index,follow" />
+    <!-- iOS 设备 begin -->
+    <meta name="apple-mobile-web-app-title" content="标题">
+    <!-- 添加到主屏后的标题（iOS 6 新增） -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- 是否启用 WebApp 全屏模式，删除苹果默认的工具栏和菜单栏 -->
+    <meta name="apple-itunes-app" content="app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL">
+    <!-- 添加智能 App 广告条 Smart App Banner（iOS 6+ Safari） -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!-- 设置苹果工具栏颜色 -->
+    <meta name="format-detection" content="telphone=no, email=no" />
+    <!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+    <!-- 启用360浏览器的极速模式(webkit) -->
+    <meta name="renderer" content="webkit">
+    <!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!-- 不让百度转码 -->
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!-- windows phone 点击无高光 -->
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="msapplication-TileColor" content="#000" />
+    <!--<link href="logo.ico" rel="shortcut icon" type="image/x-icon">-->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="./css/css.css" />
+    <link rel="stylesheet" href="./css/index.css" />
+    <title>和信车生活</title>
+</head>
+
+<body>
+    <section class="page">
+        <div class="top">
+            <h2 class="text-center title ab">每日签到</h2>
+            <div class='left ab text-center'>
+                <h4 class=''>已签到</h4>
+                <h2 class='font-big font-red'><span class="day">0</span><small class='font-sm'>天</small></h2>
+            </div>
+            <ul class="right ab">
+                <li><button class='sign'>签到送积分<i class='icon-money'></i></button>
+                    <li><a class='go btn' href="gou.html">点击积分抽奖GO</a>
+            </ul>
+            <!--<img class="img" src="./images/bg-top.png" />-->
+        </div>
+        <div class='guize'>
+            <h4 class="font-red tit">签到规则</h4>
+            <ol class="">
+                <li>每人每日签到获取积分奖励，10积分/次</li>
+                <li>每月完成连续签到任务，即可获得相应奖励
+                </li>
+                <li>如签到断档则只影响签到次数，对整体无碍</li>
+                <li>每月1号签到任务将清零，当月奖励应及时兑换</li>
+                <li>连续签到任务完成三日内兑换奖励，请在有效期 内及时使用
+                </li>
+            </ol>
+        </div>
+        <ul class="gift">
+            <li data-day='5'>
+                <i></i>
+                <strong class="con">
+                    签到5天
+                </strong>
+            </li>
+            <li data-day='10'>
+                <i></i> <strong class="con">                     签到10天                 </strong>
+            </li>
+            <li data-day='15'>
+                <i></i> <strong class="con">                     签到15天                 </strong>
+            </li>
+            <li data-day='20'>
+                <i></i> <strong class="con">                     签到20天                 </strong>
+            </li>
+            <li data-day='25'>
+                <i></i> <strong class="con">                     签到25天                 </strong>
+            </li>
+            <li data-day='30'>
+                <i></i> <strong class="con">                     签到30天                 </strong>
+            </li>
+        </ul>
+    </section>
+    <section class="mark">
+        <h1 class='tit'>已连续签到</h1>
+        <h1 class="con">15天</h1>
+    </section>
+    <script src="//cdn.bootcss.com/axios/0.15.3/axios.min.js"></script>
+    <script src="./js/index.js"></script>
+    <script>
+        //签到按钮
+        var sign = document.querySelector(".day");
+        //签到
+        document.querySelector(".sign").addEventListener("click", function () {
+            var that = this;
+            var url = "https://api.imjad.cn/cloudmusic/?type=search&s=%E5%91%A8%E6%9D%B0%E4%BC%A6";
+            var data = {};
+
+            //正式请求使用 post url data
+            axios.get(url, data).then(function (json) {
+
+                //返回的数据
+                var d = json.data;
+
+                //获得签到 state
+                if (d) {
+                    //签到成功
+                    var day = sign.innerHTML;
+                    day++;
+                    //更新 签到 state
+                    sign.innerHTML = day;
+                    //关闭按钮
+                    //that.disabled = true;
+                    //update dom gift
+                    updateGift(day)
+                    //tip
+                    markShow("已连续签到", day + "天");
+
+                } else if (d.sign == 0) {
+                    //已签到
+                    markShow("今天已签到", day + "天")
+                }
+            }).catch(function (e) {
+                //报错处理
+                console.error(e);
+            })
+
+
+        }, 0)
+        //更新 抽奖状态
+        function updateGift(day) {
+            //抽奖
+            var gifts = document.querySelectorAll(".gift li:not(.active)");
+            for (var i = 0; i < gifts.length; i++) {
+                var element = gifts[i];
+                var d = element.dataset.day;
+                if (d == day) {
+                    element.className = 'has';
+                    element.querySelector(".con").innerHTML = "点击领取";
+                    element.addEventListener("click", getGift, 0)
+
+                }
+
+            }
+
+        }
+
+        function getGift() {
+            //抽奖
+            var that = this;
+            var url = "https://api.imjad.cn/cloudmusic/?type=search&s=%E5%91%A8%E6%9D%B0%E4%BC%A6";
+            var data = {};
+            //正式请求使用 post url data
+            axios.get(url, data).then(function (json) {
+
+                //返回的数据
+                var d = json.data;
+
+                //获得签到 state
+                if (d) {
+                    //修改当前调state
+                    that.className = "active";
+                    that.querySelector(".con").innerHTML = "奖励已领取";
+                    markShow("恭喜您获得", "10积分");
+
+                }
+            }).catch(function (e) {
+                //报错处理
+                console.error(e);
+            })
+
+
+        }
+    </script>
+</body>
+
+</html>

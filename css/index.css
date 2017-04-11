@@ -1,0 +1,154 @@
+body{
+    background:#f2f2f2; 
+    font-size: 0.6rem;
+}
+.top{
+    width: 100%;
+    height: 9.5rem;
+
+    position: relative;
+    background-color: #ffea01;
+    background-image:url('../images/bg-top.png');
+    background-size:100%;
+    background-repeat:no-repeat;  
+    background-position: left bottom; 
+}
+.top .img{
+    width: 100%;
+    margin: auto;
+    vertical-align: middle;
+}
+.ab{
+    position: absolute;
+}
+.top .title{
+    margin-top: .3rem;
+    font-size: .8rem;
+    top:0;
+    left: 0;
+    width: 100%;
+}
+.top .left{
+   left: 3.3rem/*29%*/;
+   bottom:3.8rem;
+   font-size:0.6rem; 
+}
+.top .left .font-big{
+    line-height: 1.0;
+    font-size: 1.6rem;
+}
+.top .left .font-sm{
+    margin-left:0.2rem; 
+   font-size: .8rem;
+}
+.top .right{
+    right: 1.6rem;
+    bottom: 2.25rem;
+}
+.top .right li{
+    margin-bottom: .5rem;
+}
+.top .right .btn,
+.top .right button{
+    display: inline-block;
+    width: 5.2rem;
+    height: 1.8rem;
+    line-height: 1.8rem;
+    font-size:.6rem; 
+    text-align:  center;
+    border: 0 none;
+    border-radius: 5px;
+    background: #ee5121;
+    color: #fff;
+    box-shadow: 0 1px 2px 1px rgba(241, 85, 37, 0.5)
+}
+.top .right .sign:disabled,
+.top .right button:active{
+    opacity: .9;
+      box-shadow: 0 1px 2px 2px rgba(241, 85, 37, 0)
+}
+.top .icon-money{
+    display: inline-block;
+    vertical-align: middle;
+    width:1.0rem;height: 1.0rem; 
+    background-image:url('../images/icon-money.png');
+    background-size:100%;
+    background-repeat:no-repeat;   
+}
+.guize{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: .6rem;
+    background: #fff;
+}
+.guize .tit{
+    padding-left: 10px; 
+}
+.gift{
+    text-align: center;
+    font-size:0; 
+    padding:10px; 
+    background: #f2f2f2;
+}
+.gift li{
+    width:4.35rem; 
+    height: 4.55rem;
+    text-align: center;
+    font-size:0.6rem; 
+    display: inline-block;
+    background-color:#ffea01; 
+    margin-right: .25rem;
+    margin-bottom: .25rem;
+    border-radius: 10px;
+    background-image:url('../images/gift.png');
+    background-size:100%;
+    background-repeat:no-repeat;
+    background-position:top center;    
+}
+.gift li:not(.active):active{
+    opacity: 0.8;
+}
+.gift li.active{
+    background-image:url('../images/gift-active.png'); 
+    background-color:#fff; 
+}
+.gift li.has{
+    color: #ee5121;
+}
+.gift li i{
+    display: block;
+    width: 100%;
+    height:3.25rem;
+    margin-bottom: .25rem; 
+}
+.mark{
+    position: fixed;
+    width:10.25rem;
+    height: 7.25rem; 
+    left: 0;
+    top:0;
+    right: 0;
+    bottom:0;
+    margin: auto;
+    padding-top: 1.5rem;
+    background: #f00;
+    text-align: center;
+    border-radius: 20px 0 20px 0;
+    transform: scale(0);
+     -webkit-transform: scale(0);
+    transition: all .3s ;
+    -webkit-transition:all .3s; 
+}
+.mark.active{
+    opacity: 0.9;
+      transform: scale(1);
+      -webkit-transform: scale(1);
+
+}
+.mark h1{
+    font-size: 1.1rem;
+}
+.mark .con{
+    font-size: 1.4rem;
+    color: #fff;
+}

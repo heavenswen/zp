@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>抽奖</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="./css/css.css" />
+    <link rel="stylesheet" href="./css/index.css" />
+</head>
+<style>
+    body {
+        background-color: #ffffbb;
+        ;
+        /*background-image: url('./images/bg_xg.png');
+        background-size: 150%;
+        background-position: center center;
+        background-repeat: no-repeat;*/
+    }
+    
+    h3 {
+        font-size: 1.0rem;
+    }
+    
+    .box {
+        position: relative;
+        background-image: url('./images/bg_xg.png');
+        background-size: 200%;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    
+    .list {
+        margin-top: 1.0rem;
+        ;
+        padding-right: 10px;
+        font-size: 0.7rem;
+    }
+    
+    .list .tit {
+        margin-left: -15px;
+    }
+    
+    .list li {
+        margin-bottom: 5px;
+    }
+    
+    #btn {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 4.5rem;
+        height: 5.6rem;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        margin-top: -0.5rem;
+        background-image: url('./images/tragger.png');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        border: 0 none;
+        background-color: transparent;
+        outline: 0 none;
+    }
+</style>
+
+<body>
+
+
+    <div class="box"></div>
+    <!--<input type="number" />-->
+    <h3 class='font-red text-center'>剩余抽奖<span class='luck'>100</span>次数</h3>
+    <ol class="list">
+        <h5 class="tit">积分抽奖规则</h5>
+        <li>每人每日签到后将会有一次免费抽奖机会</li>
+        <li>每人每日有三次积分抽奖机会，每次抽奖将会 消耗50积分
+        </li>
+    </ol>
+    <!--tip-->
+    <section class="mark">
+        <h1 class='tit'>已连续签到</h1>
+        <h1 class="con">15天</h1>
+    </section>
+    <script src="./js/index.js"></script>
+    <script src="./js/gou.js"></script>
+    <script>
+        var box = document.querySelector(".box");//画布合作
+        var luck = document.querySelector(".luck");//抽奖
+        var luck_num = Number(luck.innerHTML);//次数 
+        var w = window.innerWidth;
+        box.innerHTML = "<canvas id = 'canvas' width ='" + w + "px'  height = '" + w + "px'></canvas><button id=\"btn\"></button>";
+
+        var btn = document.querySelector("#btn");
+        // set luck luck_num
+
+        function setLuckNum() {
+            luck_num--;
+            luck.innerHTML = luck_num;
+        }
+        //btn state
+        var tragger = 1;
+        var obj = new zhuanpan("#canvas", {
+            info: ["一等奖", ' 谢谢参与', "二等奖", ' 谢谢参与', "三等奖", ' 谢谢参与',]
+        });
+
+        btn.addEventListener("click", function () {
+            if (luck_num && tragger) {
+                // set luck luck_num
+                setLuckNum();
+                //btn state
+                tragger = 0;
+                var n = Math.random() * 10;//变量
+                obj.traggerAnimate(n, function (s) {
+                    // s = state 
+                    //btn state init
+                    tragger = 1;
+                    if (s.match(/谢谢参与/)) {
+                        if (luck_num) {
+                            markShow("每次抽奖扣积分50", "再抽一次")
+                        }
+                    } else {
+                        markShow("恭喜你获得了", s)
+                    }
+                    //修改次数
+                });
+            } else if (tragger) {
+                markShow("机会只有三次", "明天再来吧")
+            }
+        })
+    </script>
+</body>
+
+</html>
