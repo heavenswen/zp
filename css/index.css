@@ -29,8 +29,9 @@ body{
     width: 100%;
 }
 .top .left{
-   left: 3.3rem/*29%*/;
-   bottom:3.8rem;
+   left: 3.0rem/*29%*/;
+   bottom:3.5rem;
+   width: 3.1rem;
    font-size:0.6rem; 
 }
 .top .left .font-big{
