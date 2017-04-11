@@ -72,7 +72,6 @@ function zhuanpan(o, object) {
                 pos = Math.ceil(pos);
 
                 var num = age - pos;
-                num=1; 
                 //num = num > 0? num - 1 : age - 1;
                 var res = info[num];
                 console.log('num', num, 'ramdom', random, 'all', all)
