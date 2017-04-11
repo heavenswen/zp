@@ -36,12 +36,14 @@ function zhuanpan(o, object) {
     var step = 2 * Math.PI / age;//一个弧度
     var outerR = w / 2 * 0.95 - 15; //轮盘的大小
     var interR = w / 2 * 0.95 * .25;//内存空白圆的大小
-    var beginAngle = 50;//旋转起来时默认开始旋转的度数，度数愈大旋转的初始速度愈大
-    var radio = 0.98;//旋转速度衰减系数，影响旋转时间
+    var range = 20;// 转动圈数
+    var radio = 0.05;//转动比 
     var t = null;//帧er
     var canvas = document.querySelector(o);
     var context = canvas.getContext("2d");
-    //偏移
+    var deg = 360 / age;//平均角
+
+    //偏移 居中
     context.translate(w / 2, w / 2);
 
     init(context);
@@ -49,54 +51,58 @@ function zhuanpan(o, object) {
         if (t) {
             return false;
         }
-        //变量
-        var all = 0;
-        var random = n;
-        var step = beginAngle + (5 * random);
-        var angle = 0;
+        //默认旋转路径
+        var define_r = range * 360;
+        //设置终点 0开始
+        var random = 360 - (n + 1) * deg + deg/2;
+        console.log(n, random)
+        define_r = (define_r + random);
+        //var setdeg = beginAngle;
+        var angle = 360 ;
 
         //帧动画
         t = requestAnimationFrame(animate);
 
         function animate() {
-            step *= radio;
-
-            if (step <= 0.1) {
+            //setdeg *= radio;
+            if (define_r < 0.1) {
                 //animate init
                 cancelAnimationFrame(t);
                 t = null;
 
                 //获得旋转到达
-                var pos = angle / (360 / age);
+                //var pos = angle / (360 / age);
 
-                pos = Math.ceil(pos);
+                //pos = Math.ceil(pos);
 
-                var num = age - pos;
-                //num = num > 0? num - 1 : age - 1;
-                var res = info[num];
-                console.log('num', num, 'ramdom', random, 'all', all)
-                //callback
-                all = 0;
-                if (f) f(res);
+                //var num = age - pos;
+                console.log(angle)
+                //提示内容
+                var res = info[n];
+                //callback 指向内容 angle角度
+                if (f) f(res, angle);
             } else {
-                //clean 
-                context.clearRect(-250, -250, w, w);
-                all++;
-                angle += step;
-                if (angle > 360) {
+                //动画
+                //转动幅度 总幅度%
+                var rotate_deg = define_r * radio;
+                //清除幅度
+                define_r -= rotate_deg;
+                //画布旋转幅度
+                angle += rotate_deg;
+
+                //过角
+                if (angle >= 360) {
                     angle -= 360;
                 }
+                //重绘画布
+                context.clearRect(-250, -250, w, w);
                 context.save();
                 context.beginPath();
-
-                //旋转 幅度
-                var rotate = angle * Math.PI / 180;
-                context.rotate(rotate);
-
-
+                //旋转 幅度计算
+                context.rotate(angle * Math.PI / 180);
                 init(context);
                 context.restore();
-                //帧
+                //继续帧
                 t = requestAnimationFrame(animate);
 
             }
@@ -105,10 +111,6 @@ function zhuanpan(o, object) {
 
     //canvas init
     function init(context) {
-
-        var start_deg = 360 / age;//单个角
-        //block
-
 
         for (var i = 0; i < age; i++) {
             context.save();
@@ -126,7 +128,7 @@ function zhuanpan(o, object) {
             context.restore();
         }
 
-        // center 
+        // center  园
         context.save();
         context.beginPath();
         //context.fillStyle = "#fff";
@@ -143,12 +145,12 @@ function zhuanpan(o, object) {
             context.font = font;
             context.textAlign = "center";
             context.textBaseline = "middle";
-            //减90度
-            var start = i * start_deg - 90;
+            //重置0度位置 减90度
+            var start = i * deg - 90 + deg / 2;
             start = start >= 0 ? start : 360 + start;
             var rotate = start * Math.PI / 180;
             //rotate = rotate >= 0 ? rotate :
-            context.rotate(rotate + step / 2);
+            context.rotate(rotate);
             context.fillText(info[i], (outerR + interR) / 2, 0);
             context.restore();
         }

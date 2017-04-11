@@ -103,8 +103,9 @@
         }
         //btn state
         var tragger = 1;
+        var info = ["一等奖0", ' 谢谢参与1', "二等奖2", ' 谢谢参与3', "三等奖4", ' 谢谢参与5'];
         var obj = new zhuanpan("#canvas", {
-            info: ["一等奖", ' 谢谢参与', "二等奖", ' 谢谢参与', "三等奖", ' 谢谢参与',]
+            info: info
         });
 
         btn.addEventListener("click", function () {
@@ -113,7 +114,8 @@
                 setLuckNum();
                 //btn state
                 tragger = 0;
-                var n = Math.random() * 10;//变量
+                //旋转目标
+                var n = 2;
                 obj.traggerAnimate(n, function (s) {
                     // s = state 
                     //btn state init
