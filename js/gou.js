@@ -36,7 +36,7 @@ function zhuanpan(o, object) {
     var step = 2 * Math.PI / age;//一个弧度
     var outerR = w / 2 * 0.95 - 15; //轮盘的大小
     var interR = w / 2 * 0.95 * .25;//内存空白圆的大小
-    var range = 20;// 转动圈数
+    var range = 10;// 转动圈数
     var radio = 0.05;//转动比 
     var t = null;//帧er
     var canvas = document.querySelector(o);
@@ -54,11 +54,10 @@ function zhuanpan(o, object) {
         //默认旋转路径
         var define_r = range * 360;
         //设置终点 0开始
-        var random = 360 - (n + 1) * deg + deg/2;
-        console.log(n, random)
+        var random = 360 - (n + 1) * deg + deg / 2;
         define_r = (define_r + random);
         //var setdeg = beginAngle;
-        var angle = 360 ;
+        var angle = 360;
 
         //帧动画
         t = requestAnimationFrame(animate);
@@ -70,17 +69,17 @@ function zhuanpan(o, object) {
                 cancelAnimationFrame(t);
                 t = null;
 
-                //获得旋转到达
-                //var pos = angle / (360 / age);
+                //检测实际的位置
+                var pos = angle / (360 / age);
 
-                //pos = Math.ceil(pos);
+                pos = Math.ceil(pos);
 
-                //var num = age - pos;
-                console.log(angle)
+                var num = age - pos;
+                //console.log(angle)
                 //提示内容
-                var res = info[n];
+                var res = info[num];
                 //callback 指向内容 angle角度
-                if (f) f(res, angle);
+                if (f) f(res, num, angle);
             } else {
                 //动画
                 //转动幅度 总幅度%
